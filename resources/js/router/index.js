@@ -5,8 +5,29 @@ import Register from '@/pages/auth/Register.vue'
 import UsersIndex from '@/pages/users/UsersIndex.vue'
 import UserShow from '@/pages/users/UserShow.vue'
 import Dashboard from '@/pages/dashboard/Dashboard.vue'
+import ProjectsList from '@/pages/projects/ProjectsList.vue'
+import ProjectWizard from '@/pages/projects/ProjectWizard.vue'
+import ProjectWorkspace from '@/pages/projects/ProjectWorkspace.vue'
 
 const routes = [
+    {
+        path: '/',
+        name: 'projects.list',
+        component: ProjectsList,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/projects/new',
+        name: 'projects.wizard',
+        component: ProjectWizard,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/projects/:id',
+        name: 'projects.workspace',
+        component: ProjectWorkspace,
+        meta: { requiresAuth: true }
+    },
   {
         path: '/admin',
         name: 'dashboard',
@@ -57,7 +78,7 @@ router.beforeEach((to, from, next) => {
         }
     } else if (to.matched.some((record) => record.meta.guest)) {
         if (token) {
-            next({ name: 'admin' })
+            next({ name: 'projects.list' })
         } else {
             next()
         }
