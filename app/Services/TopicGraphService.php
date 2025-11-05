@@ -18,7 +18,7 @@ class TopicGraphService
         $maxSpokes = (int) ($payload['maxSpokes'] ?? 4);
         $constraints = $payload['constraints'] ?? [];
 
-        $nodes = $this->generateNodes($seed, $depth, $maxSpokes, $constraints);
+        $nodes = $this->generateNodes($seed, $depth, $maxSpokes, $constraints, $locale);
         $links = $this->generateLinks($nodes);
 
         $project = [
@@ -176,7 +176,7 @@ class TopicGraphService
         return self::CACHE_KEY_PREFIX . $projectId;
     }
 
-    private function generateNodes(string $seed, int $depth, int $maxSpokes, array $constraints): array
+    private function generateNodes(string $seed, int $depth, int $maxSpokes, array $constraints, string $locale): array
     {
         $hubs = max(2, min($maxSpokes, 4));
 
