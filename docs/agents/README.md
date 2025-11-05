@@ -1,6 +1,6 @@
 # What this app is
 
-This is a Laravel CRM application.
+This is a Laravel application.
 
 ## Guidelines For AI Agents
 
